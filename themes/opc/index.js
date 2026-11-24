@@ -1157,8 +1157,8 @@ const LayoutSlug = props => {
   return (
     <main className='mx-auto max-w-3xl px-5 py-12 md:px-8'>
       <div className='opc-post-meta'>
-        <SmartLink href='/' className='opc-nav-link'>
-          ← 返回首页
+        <SmartLink href='/#records' className='opc-nav-link'>
+          ← 返回长期记录
         </SmartLink>
         {meta && <span className='opc-muted text-xs'>{meta}</span>}
       </div>
