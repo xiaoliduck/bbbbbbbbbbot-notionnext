@@ -15,7 +15,7 @@ const CONFIG = {
     '每轮只推进一个最小可验证目标：先买或接入成熟方案，再复制成熟做法，最后才自研；执行 AI 只领取一张任务单，交付文件后结束。', // 任务单-口径
   OPC_NOW_TITLE: '最近正在做什么', // 方向段标题
   OPC_NOW_DESCRIPTION:
-    '所有方向都按 ready、running、review、done 推进，只统计有效产物、验收结果和真实业务数据。', // 方向段说明 / 任务单-验收
+    '所有方向都按 ready、running、review、done 推进，只统计有效产物、验收结果和真实业务', // 方向段说明 / 任务单-验收
   OPC_NOW_ITEMS: '游戏,小说,短剧,工具产品,流量媒体,AI企业工作流,量化交易', // 方向列表；支持名称|阶段|说明
   OPC_METHOD_TITLE: '人是唯一的瓶颈，所以只做监督', // 方法段标题
   OPC_METHOD_DESCRIPTION:
