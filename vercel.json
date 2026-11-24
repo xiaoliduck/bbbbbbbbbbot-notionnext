@@ -3,14 +3,16 @@
   "trailingSlash": false,
   "ignoreCommand": "case \"$VERCEL_GIT_COMMIT_MESSAGE\" in *\"[skip-version]\"*) exit 0;; *) exit 1;; esac",
   "headers": [],
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
-      "destination": "/index.html"
+      "destination": "/index.html",
+      "permanent": false
     },
     {
       "source": "/notion-preview",
-      "destination": "/"
+      "destination": "/archive",
+      "permanent": false
     }
   ]
 }
