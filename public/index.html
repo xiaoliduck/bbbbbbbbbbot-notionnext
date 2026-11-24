@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5ef">
+  <title>BBBBBBBBBBOT</title>
+  <meta name="description" content="节点、面板插件和手头小工具的个人笔记。">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile.css">
+  <script>if (matchMedia("(max-width: 640px)").matches) document.documentElement.classList.add("m-app");</script>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a class="logo" href="index.html"><img class="mark" id="mark" src="avatar.png" alt=""><span class="logo-copy"><h1 id="brand">BBBBBBBBBBOT</h1><span class="logo-line" id="line">先记下来，以后才找得回。</span></span></a>
+    <nav>
+      <a href="shop.html">小卖部</a>
+      <a href="#lab">改造实验室</a>
+      <a href="#log">折腾.log</a>
+      <a href="#posts">笔记</a>
+      <a href="#about">关于</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="bento" aria-label="首页">
+      <article class="tile feature">
+        <img class="feature-bg" src="media/home-card.jpg" alt="">
+        <h2>你只是学会了用AI包装自己的平庸。</h2>
+      </article>
+      <article class="tile">
+        <p class="tag">本地</p>
+        <h3>项目分档存放</h3>
+        <p>英语、生图、商城、客户端、插件，各放一档。</p>
+      </article>
+      <article class="tile">
+        <p class="tag">工具</p>
+        <h3>T3 桌面</h3>
+        <p>跟进默认是引导，按住 Command 走另一种。</p>
+      </article>
+      <article class="tile paper">
+        <p class="tag">怎么更新</p>
+        <h3>改 site.js，然后刷新</h3>
+        <p>站名、简介、文章都在这一个文件里。没有后台，也没有登录。</p>
+      </article>
+    </section>
+
+    <section class="section" id="shop">
+      <h2>小卖部</h2>
+      <div class="list">
+        <a class="row shop-door" href="shop.html">
+          <span class="shop-mark" aria-hidden="true"><i class="bell"></i></span>
+          <span><strong>小卖部</strong><span>点进去看在卖什么。</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="section-head reveal">
+        <span class="kicker">笔记</span>
+        <h2>写下来的东西</h2>
+        <p class="lead">改造、折腾，和其他手头记录。点开是一张卡片。</p>
+        <p class="cadence"><span class="live-dot" id="note-live">写在 site.js</span></p>
+      </div>
+      <div class="board reveal" style="--d:70ms">
+        <span id="lab" class="jump"></span>
+        <span id="log" class="jump"></span>
+        <span id="posts" class="jump"></span>
+        <div class="spot" id="spot">
+          <div class="slides" id="slides"></div>
+          <div class="dots" id="dots"></div>
+        </div>
+        <div class="filters" id="filters" role="tablist" aria-label="笔记分类"></div>
+        <div class="feed" id="feed"></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>关于</h2>
+      <div class="list" id="about-list"></div>
+    </section>
+  </main>
+  <div id="m-shell">
+    <header class="m-bar">
+      <button class="m-back" type="button">首页</button>
+      <span class="m-bar-title" id="m-bar-title"></span>
+    </header>
+    <div class="m-view m-view-home"></div>
+    <div class="m-view m-view-shop"></div>
+    <div class="m-view m-view-lab"></div>
+    <div class="m-view m-view-log"></div>
+    <div class="m-view m-view-posts"></div>
+    <div class="m-view m-view-about"></div>
+    <nav class="m-tabs" aria-label="底部标签">
+      <button type="button" data-view="home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
+        首页
+      </button>
+      <button type="button" data-view="posts">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h10"/></svg>
+        笔记
+      </button>
+      <button type="button" data-view="about">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6.5 19.2c1.1-2.4 3-3.7 5.5-3.7s4.4 1.3 5.5 3.7"/></svg>
+        关于
+      </button>
+    </nav>
+  </div>
+  <div class="note-modal" id="note-modal" hidden>
+    <div class="note-card" role="dialog" aria-modal="true" aria-labelledby="note-title">
+      <button class="note-x" type="button" data-close aria-label="关闭">×</button>
+      <p class="note-kicker"><span class="tag" id="note-tag"></span><time id="note-date"></time></p>
+      <h2 id="note-title"></h2>
+      <div class="body" id="note-body"></div>
+    </div>
+  </div>
+  <script src="site.js"></script>
+  <script src="note.js"></script>
+  <script src="shop.js"></script>
+  <script src="home.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>

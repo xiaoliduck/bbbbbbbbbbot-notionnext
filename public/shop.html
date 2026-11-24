@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5ef">
+  <title>小卖部</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a class="logo" href="index.html"><img class="mark" id="mark" src="avatar.png" alt=""><span id="brand">BBBBBBBBBBOT</span></a>
+    <nav>
+      <a href="shop.html">小卖部</a>
+      <a href="index.html#lab">改造实验室</a>
+      <a href="index.html#log">折腾.log</a>
+      <a href="index.html#posts">笔记</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <section class="section shop-page">
+      <h2>小卖部</h2>
+      <p class="lead">鼠标放上去，封面往左翻开。</p>
+      <div id="books"></div>
+    </section>
+  </main>
+  <footer class="foot" id="foot"></footer>
+  <script src="site.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    const site = window.SITE;
+    document.title = "小卖部 · " + site.name;
+    document.getElementById("brand").textContent = site.name;
+    document.getElementById("mark").alt = site.name;
+    document.getElementById("foot").textContent = site.name + " · 静态页面，文章写在 site.js";
+    window.renderBooks(document.getElementById("books"));
+    const nav = document.getElementById("nav");
+    document.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 4);
+    }, { passive: true });
+  </script>
+</body>
+</html>
