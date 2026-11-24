@@ -236,19 +236,35 @@ const SiteAvatar = ({ icon, title }) => {
 const TaskTicket = ({ icon, cover, title }) => (
   <aside className='opc-ticket'>
     <div className='opc-ticket-top'>
-      <div className='opc-ticket-tab'>本轮任务单</div>
-      <StageTag stage='running'>running</StageTag>
+      <div className='opc-ticket-tab'>方案</div>
     </div>
 
     <div className='flex items-center gap-3 border-b px-5 py-4'>
       <SiteAvatar icon={icon} title={title} />
-      <div className='min-w-0'>
-        <div className='opc-muted text-xs'>执行主体</div>
-        <div className='mt-0.5 truncate text-sm font-semibold'>
-          {siteName()}
-        </div>
-      </div>
+      <SmartLink
+        href='/article/ai-model-offer'
+        className='min-w-0 text-sm font-semibold leading-6'
+      >
+        提供 ai大模型处理方案
+      </SmartLink>
     </div>
+
+    <dl className='opc-ticket-rows'>
+      <div>
+        <dt>路径</dt>
+        <dd>
+          从货源到平台到开发者，一站式解决无法使用国外一流 AI 大模型的问题。
+        </dd>
+      </div>
+      <div>
+        <dt>维护</dt>
+        <dd>稳定维护，不宕机。</dd>
+      </div>
+      <div>
+        <dt>远程</dt>
+        <dd>手机远程电脑大模型。</dd>
+      </div>
+    </dl>
 
     {cover && (
       <div className='opc-ticket-cover'>
@@ -261,21 +277,6 @@ const TaskTicket = ({ icon, cover, title }) => (
         />
       </div>
     )}
-
-    <dl className='opc-ticket-rows'>
-      <div>
-        <dt>目标</dt>
-        <dd>{c('OPC_CARD_TITLE')}</dd>
-      </div>
-      <div>
-        <dt>口径</dt>
-        <dd className='opc-muted'>{c('OPC_CARD_DESCRIPTION')}</dd>
-      </div>
-      <div>
-        <dt>验收</dt>
-        <dd className='opc-muted'>{c('OPC_NOW_DESCRIPTION')}</dd>
-      </div>
-    </dl>
   </aside>
 )
 
