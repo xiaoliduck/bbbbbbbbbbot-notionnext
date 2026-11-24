@@ -165,7 +165,7 @@ const SiteHeader = () => {
       <div className='mx-auto flex max-w-[80rem] items-center gap-4 px-5 py-4 md:px-8'>
         <SmartLink href='/' className='opc-brand'>
           <span className='opc-brand-mark' aria-hidden='true'>
-            T
+            <img src='/bot-icon.jpg' alt='' />
           </span>
           <span className='whitespace-nowrap text-sm font-semibold tracking-[0.12em]'>
             {siteName()}
@@ -615,15 +615,19 @@ const Style = () => (
 
     #theme-opc .opc-brand-mark {
       display: inline-flex;
-      height: 1.6rem;
-      width: 1.6rem;
+      height: 2rem;
+      width: 2rem;
+      overflow: hidden;
       align-items: center;
       justify-content: center;
-      border-radius: 0.375rem;
-      background: var(--opc-console-primary);
-      color: var(--opc-console-bg);
-      font-size: 0.85rem;
-      font-weight: 700;
+      border-radius: 0.45rem;
+      background: #fff;
+    }
+
+    #theme-opc .opc-brand-mark img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
 
     #theme-opc .opc-nav-link {
@@ -1123,8 +1127,8 @@ const LayoutBase = ({ children }) => (
 const LayoutIndex = props => {
   const siteIcon =
     props?.siteInfo?.icon ||
-    siteConfig('AVATAR', '/avatar.svg', props?.NOTION_CONFIG) ||
-    '/avatar.svg'
+    siteConfig('AVATAR', '/bot-icon.jpg', props?.NOTION_CONFIG) ||
+    '/bot-icon.jpg'
   const siteCover =
     props?.siteInfo?.pageCover ||
     siteConfig('HOME_BANNER_IMAGE', '', props?.NOTION_CONFIG)
