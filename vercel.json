@@ -13,6 +13,26 @@
       "source": "/notion-preview",
       "destination": "/archive",
       "permanent": false
+    },
+    {
+      "source": "/2020/10/08/%E8%87%AA%E5%BB%BADDNS",
+      "destination": "/post.html?slug=dynu-ddns",
+      "permanent": false
+    },
+    {
+      "source": "/2020/12/22/hello-world",
+      "destination": "/post.html?slug=hello-world",
+      "permanent": false
+    },
+    {
+      "source": "/2020/09/26/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4",
+      "destination": "/post.html?slug=linux-commands",
+      "permanent": false
+    },
+    {
+      "source": "/2020/09/25/about-hexo",
+      "destination": "/post.html?slug=about-hexo",
+      "permanent": false
     }
   ]
 }
