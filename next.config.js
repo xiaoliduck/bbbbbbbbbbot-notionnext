@@ -258,11 +258,6 @@ const nextConfig = {
       return [
         ...[
   {
-    "source": "/",
-    "destination": "/index.html",
-    "permanent": false
-  },
-  {
     "source": "/notion-preview",
     "destination": "/archive",
     "permanent": false
