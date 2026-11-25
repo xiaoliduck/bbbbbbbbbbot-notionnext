@@ -201,82 +201,56 @@ const SiteHeader = () => {
  * 首屏
  * ------------------------------------------------------------------ */
 
-const getIconSrc = icon =>
-  typeof icon === 'string' && icon.startsWith('/icons/')
-    ? `https://www.notion.so${icon}`
-    : icon
+const OFFER_HREF = '/article/ai-model-offer'
+const OFFER_TITLE = '提供 ai大模型处理方案'
+const OFFER_LINES = [
+  {
+    src: '/offer/path.jpg',
+    text: '从货源到平台到开发者，一站式解决开发者无法使用国外一流 ai 大模型的问题。'
+  },
+  {
+    src: '/offer/steady.jpg',
+    text: '稳定维护服务，不宕机，增加工作效率，增加工作能力，几何级别的提升。'
+  },
+  {
+    src: '/offer/phone.jpg',
+    text: '告别传统程序员码代码的低效率，解放开发者的脑力劳动。同样提供开发者远程 ai 开发功能，让开发者能够随时随地用手机远程电脑大模型来保证产出。'
+  },
+  {
+    src: '/offer/tables.jpg',
+    text: '目前已经为五百强上市企业，国内知名企业，中小型企业，小工作室完成业务交付，以及稳定维护。'
+  }
+]
 
-const SiteAvatar = ({ icon, title }) => {
-  const iconSrc = getIconSrc(icon)
+const OfferFigure = ({ src, alt, priority = false }) => (
+  <figure className='opc-offer-figure'>
+    <LazyImage
+      priority={priority}
+      src={src}
+      alt={alt || OFFER_TITLE}
+      className='h-full w-full object-cover'
+    />
+  </figure>
+)
 
-  if (
-    typeof iconSrc === 'string' &&
-    (iconSrc.startsWith('http') ||
-      iconSrc.startsWith('data:') ||
-      iconSrc.startsWith('/'))
-  ) {
-    return (
+const TaskTicket = () => (
+  <aside className='opc-ticket'>
+    <SmartLink href={OFFER_HREF} className='opc-offer-shot'>
       <LazyImage
         priority
-        src={iconSrc}
-        fallbackSrc='/avatar.svg'
-        alt={title}
-        className='h-11 w-11 rounded-md object-cover'
+        src={OFFER_LINES[0].src}
+        alt={OFFER_TITLE}
+        className='h-full w-full object-cover'
       />
-    )
-  }
-
-  return (
-    <div className='flex h-11 w-11 items-center justify-center rounded-md text-xl font-semibold'>
-      {iconSrc || 'T'}
-    </div>
-  )
-}
-
-const TaskTicket = ({ icon, cover, title }) => (
-  <aside className='opc-ticket'>
-    <div className='opc-ticket-top'>
-      <div className='opc-ticket-tab'>方案</div>
-    </div>
-
-    <div className='flex items-center gap-3 border-b px-5 py-4'>
-      <SiteAvatar icon={icon} title={title} />
-      <SmartLink
-        href='/article/ai-model-offer'
-        className='min-w-0 text-sm font-semibold leading-6'
-      >
-        提供 ai大模型处理方案
+    </SmartLink>
+    <div className='opc-offer-copy'>
+      <SmartLink href={OFFER_HREF} className='opc-offer-title'>
+        {OFFER_TITLE}
       </SmartLink>
+      {OFFER_LINES.map(line => (
+        <p key={line.src}>{line.text}</p>
+      ))}
     </div>
-
-    <dl className='opc-ticket-rows'>
-      <div>
-        <dt>路径</dt>
-        <dd>
-          从货源到平台到开发者，一站式解决无法使用国外一流 AI 大模型的问题。
-        </dd>
-      </div>
-      <div>
-        <dt>维护</dt>
-        <dd>稳定维护，不宕机。</dd>
-      </div>
-      <div>
-        <dt>远程</dt>
-        <dd>手机远程电脑大模型。</dd>
-      </div>
-    </dl>
-
-    {cover && (
-      <div className='opc-ticket-cover'>
-        <LazyImage
-          priority
-          src={cover}
-          fallbackSrc='/bg_image.jpg'
-          alt={`${title} 封面`}
-          className='h-full w-full object-cover'
-        />
-      </div>
-    )}
   </aside>
 )
 
@@ -298,7 +272,7 @@ const PipelineRail = () => (
   </div>
 )
 
-const HeroSection = ({ siteIcon, siteCover }) => (
+const HeroSection = () => (
   <div className='opc-hero-band'>
     <section className='opc-hero'>
       <div className='opc-hero-grid'>
@@ -319,7 +293,7 @@ const HeroSection = ({ siteIcon, siteCover }) => (
           </div>
         </div>
 
-        <TaskTicket icon={siteIcon} cover={siteCover} title={pageTitle()} />
+        <TaskTicket />
       </div>
 
       <div id='pipeline' className='opc-hero-rail'>
@@ -747,7 +721,79 @@ const Style = () => (
     @media (min-width: 1024px) {
       #theme-opc .opc-hero-grid {
         grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+        align-items: start;
       }
+    }
+
+    #theme-opc .opc-offer-shot {
+      display: block;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+
+    #theme-opc .opc-offer-shot img,
+    #theme-opc .opc-offer-figure img {
+      outline: 1px solid oklch(0 0 0 / 0.1);
+      outline-offset: -1px;
+    }
+
+    .dark #theme-opc .opc-offer-shot img,
+    .dark #theme-opc .opc-offer-figure img {
+      outline-color: oklch(1 0 0 / 0.1);
+    }
+
+    #theme-opc .opc-offer-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 1.15rem 1.25rem 1.3rem;
+    }
+
+    #theme-opc .opc-offer-title {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.45;
+      text-wrap: balance;
+    }
+
+    #theme-opc .opc-offer-copy p {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      text-wrap: pretty;
+    }
+
+    #theme-opc .opc-offer-heading {
+      margin: 1.35rem 0 0;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    #theme-opc .opc-offer-block {
+      margin-top: 1.75rem;
+    }
+
+    #theme-opc .opc-offer-figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      aspect-ratio: 16 / 9;
+      background: color-mix(
+        in srgb,
+        var(--opc-console-border) 40%,
+        transparent
+      );
+    }
+
+    #theme-opc .opc-offer-lead,
+    #theme-opc .opc-offer-block p {
+      margin: 0.9rem 0 0;
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      text-wrap: pretty;
     }
 
     #theme-opc .opc-display {
@@ -1126,18 +1172,11 @@ const LayoutBase = ({ children }) => (
 )
 
 const LayoutIndex = props => {
-  const siteIcon =
-    props?.siteInfo?.icon ||
-    siteConfig('AVATAR', '/bot-icon.jpg', props?.NOTION_CONFIG) ||
-    '/bot-icon.jpg'
-  const siteCover =
-    props?.siteInfo?.pageCover ||
-    siteConfig('HOME_BANNER_IMAGE', '', props?.NOTION_CONFIG)
   const posts = props?.posts || []
 
   return (
     <main>
-      <HeroSection siteIcon={siteIcon} siteCover={siteCover} />
+      <HeroSection />
       <DirectionsPanel />
       <MethodPanel />
       <RecordsPanel posts={posts} postCount={props?.postCount} />
@@ -1166,6 +1205,26 @@ const LayoutSlug = props => {
       <article id='article-wrapper'>
         {props.lock ? (
           <ArticleLock {...props} />
+        ) : post &&
+          (post.title === OFFER_TITLE ||
+            String(post.slug || '').includes('ai-model-offer')) ? (
+          <>
+            <OfferFigure
+              src={OFFER_LINES[0].src}
+              alt={OFFER_LINES[0].text}
+              priority
+            />
+            <h1 className='opc-offer-heading'>{OFFER_TITLE}</h1>
+            <p className='opc-offer-lead'>{OFFER_LINES[0].text}</p>
+            {OFFER_LINES.slice(1).map(line => (
+              <section key={line.src} className='opc-offer-block'>
+                <OfferFigure src={line.src} alt={line.text} />
+                <p>{line.text}</p>
+              </section>
+            ))}
+            <ShareBar post={post} />
+            <Comment frontMatter={post} />
+          </>
         ) : post ? (
           <>
             <NotionPage {...props} />
