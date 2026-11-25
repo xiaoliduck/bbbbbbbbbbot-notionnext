@@ -222,15 +222,79 @@ const OFFER_LINES = [
   }
 ]
 
-const OfferFigure = ({ src, alt, priority = false }) => (
-  <figure className='opc-offer-figure'>
-    <LazyImage
-      priority={priority}
-      src={src}
-      alt={alt || OFFER_TITLE}
-      className='h-full w-full object-cover'
-    />
-  </figure>
+const OfferDeck = () => (
+  <article id='article-wrapper' className='opc-deck'>
+    <section className='opc-slide'>
+      <div className='opc-slide-copy'>
+        <SmartLink href='/#records' className='opc-deck-back'>
+          ← 返回长期记录
+        </SmartLink>
+        <h1>{OFFER_TITLE}</h1>
+        <p>{OFFER_LINES[0].text}</p>
+      </div>
+      <div className='opc-slide-media'>
+        <LazyImage
+          priority
+          src={OFFER_LINES[0].src}
+          alt={OFFER_LINES[0].text}
+          className='h-full w-full object-cover'
+        />
+      </div>
+    </section>
+
+    <section className='opc-slide opc-slide-flip'>
+      <div className='opc-slide-copy'>
+        <span className='opc-slide-index'>02</span>
+        <h2>稳定维护服务，不宕机</h2>
+        <p>增加工作效率，增加工作能力，几何级别的提升。</p>
+      </div>
+      <div className='opc-slide-media'>
+        <LazyImage
+          src={OFFER_LINES[1].src}
+          alt={OFFER_LINES[1].text}
+          className='h-full w-full object-cover'
+        />
+      </div>
+    </section>
+
+    <section className='opc-slide'>
+      <div className='opc-slide-copy'>
+        <span className='opc-slide-index'>03</span>
+        <h2>告别传统程序员码代码的低效率，解放开发者的脑力劳动。</h2>
+        <p>
+          同样提供开发者远程 ai
+          开发功能，让开发者能够随时随地用手机远程电脑大模型来保证产出。
+        </p>
+      </div>
+      <div className='opc-slide-media'>
+        <LazyImage
+          src={OFFER_LINES[2].src}
+          alt={OFFER_LINES[2].text}
+          className='h-full w-full object-cover'
+        />
+      </div>
+    </section>
+
+    <section className='opc-slide opc-slide-board'>
+      <div className='opc-slide-copy'>
+        <span className='opc-slide-index'>04</span>
+        <p>{OFFER_LINES[3].text}</p>
+        <ul className='opc-slide-names'>
+          <li>五百强上市企业</li>
+          <li>国内知名企业</li>
+          <li>中小型企业</li>
+          <li>小工作室</li>
+        </ul>
+      </div>
+      <div className='opc-slide-media'>
+        <LazyImage
+          src={OFFER_LINES[3].src}
+          alt={OFFER_LINES[3].text}
+          className='h-full w-full object-cover'
+        />
+      </div>
+    </section>
+  </article>
 )
 
 const TaskTicket = () => (
@@ -796,6 +860,118 @@ const Style = () => (
       text-wrap: pretty;
     }
 
+    html:has(.opc-deck) {
+      scroll-snap-type: y proximity;
+    }
+
+    #theme-opc .opc-deck {
+      background: #0a0a0a;
+      color: #ece8e1;
+    }
+
+    #theme-opc .opc-slide {
+      display: grid;
+      min-height: calc(100svh - 4.5rem);
+      scroll-snap-align: start;
+      scroll-margin-top: 4.5rem;
+    }
+
+    #theme-opc .opc-slide-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.15rem;
+      padding: clamp(1.5rem, 4vw, 3.25rem);
+    }
+
+    #theme-opc .opc-deck-back {
+      color: #a8a49b;
+      font-size: 0.875rem;
+    }
+
+    #theme-opc .opc-slide-index {
+      color: #6b6760;
+      font-size: 0.75rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.14em;
+    }
+
+    #theme-opc .opc-slide h1,
+    #theme-opc .opc-slide h2 {
+      margin: 0;
+      max-width: 16em;
+      color: #ece8e1;
+      font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      text-wrap: balance;
+    }
+
+    #theme-opc .opc-slide p {
+      margin: 0;
+      max-width: 36rem;
+      color: #a8a49b;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+
+    #theme-opc .opc-slide-media {
+      position: relative;
+      min-height: 42vh;
+    }
+
+    #theme-opc .opc-slide-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #theme-opc .opc-slide-names {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1.25rem;
+      margin: 0.4rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #theme-opc .opc-slide-names li {
+      margin: 0;
+      border-top: 1px solid #2a2a28;
+      padding-top: 0.75rem;
+      color: #ece8e1;
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    @media (min-width: 900px) {
+      #theme-opc .opc-slide {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      }
+
+      #theme-opc .opc-slide-flip .opc-slide-media {
+        order: 2;
+      }
+
+      #theme-opc .opc-slide-board {
+        grid-template-columns: 1fr;
+      }
+
+      #theme-opc .opc-slide-board .opc-slide-media {
+        min-height: 38vh;
+        order: 0;
+      }
+
+      #theme-opc .opc-slide-names {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
     #theme-opc .opc-display {
       font-size: clamp(2.75rem, 8vw, 5rem);
       font-weight: 600;
@@ -1194,6 +1370,23 @@ const LayoutSlug = props => {
     .filter(Boolean)
     .join(' · ')
 
+  const isOffer =
+    post &&
+    (post.title === OFFER_TITLE ||
+      String(post.slug || '').includes('ai-model-offer'))
+
+  if (isOffer && !props.lock) {
+    return (
+      <>
+        <OfferDeck />
+        <div className='mx-auto max-w-3xl px-5 py-12 md:px-8'>
+          <ShareBar post={post} />
+          <Comment frontMatter={post} />
+        </div>
+      </>
+    )
+  }
+
   return (
     <main className='mx-auto max-w-3xl px-5 py-12 md:px-8'>
       <div className='opc-post-meta'>
@@ -1205,26 +1398,6 @@ const LayoutSlug = props => {
       <article id='article-wrapper'>
         {props.lock ? (
           <ArticleLock {...props} />
-        ) : post &&
-          (post.title === OFFER_TITLE ||
-            String(post.slug || '').includes('ai-model-offer')) ? (
-          <>
-            <OfferFigure
-              src={OFFER_LINES[0].src}
-              alt={OFFER_LINES[0].text}
-              priority
-            />
-            <h1 className='opc-offer-heading'>{OFFER_TITLE}</h1>
-            <p className='opc-offer-lead'>{OFFER_LINES[0].text}</p>
-            {OFFER_LINES.slice(1).map(line => (
-              <section key={line.src} className='opc-offer-block'>
-                <OfferFigure src={line.src} alt={line.text} />
-                <p>{line.text}</p>
-              </section>
-            ))}
-            <ShareBar post={post} />
-            <Comment frontMatter={post} />
-          </>
         ) : post ? (
           <>
             <NotionPage {...props} />
