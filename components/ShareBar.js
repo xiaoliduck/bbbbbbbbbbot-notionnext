@@ -10,12 +10,19 @@ const ShareButtons = dynamic(() => import('@/components/ShareButtons'), {
  * @param {} param0
  * @returns
  */
+const shareBarEnabled = () => {
+  const raw = siteConfig('POST_SHARE_BAR_ENABLE')
+  if (typeof raw === 'boolean') return raw
+  if (raw === 'true') return true
+  try {
+    return JSON.parse(raw) === true
+  } catch {
+    return false
+  }
+}
+
 const ShareBar = ({ post }) => {
-  if (
-    !JSON.parse(siteConfig('POST_SHARE_BAR_ENABLE')) ||
-    !post ||
-    post?.type !== 'Post'
-  ) {
+  if (!shareBarEnabled() || !post || post?.type !== 'Post') {
     return <></>
   }
 
