@@ -1331,7 +1331,7 @@ const Style = () => (
       overflow: hidden;
       border-radius: 0.75rem;
       aspect-ratio: 16 / 9;
-      background: #0a0a0a;
+      background: #e6e0d6;
     }
 
     #theme-opc .opc-linghui-figure img {
@@ -1449,16 +1449,16 @@ const LinghuiEssay = () => (
     </p>
     <LinghuiFigure
       priority
-      src='/linghui/studio.jpg'
-      alt='暗色工作台上的显示器，屏幕里是一张没有文字的建筑照片'
+      src='/linghui/court.jpg'
+      alt='雨后的石砌庭院，一扇窗亮着'
     />
     <h2>要解决的问题</h2>
     <p>
       付款。常见的海外订阅在国内走不通。站点用支付宝当面付：预下单，页面出示二维码，到账通知先做 RSA2 验签，再核对应用和金额。同一笔通知会重复到达，积分只允许加一次。积分包有三档：入门包 9.90 元 / 200 积分，进阶包 49 元 / 1100 积分，工作室包 99 元 / 2400 积分。
     </p>
     <LinghuiFigure
-      src='/linghui/pay.jpg'
-      alt='暗色工作台上竖着一台手机，旁边是一块黑色终端'
+      src='/linghui/slab.jpg'
+      alt='浅色石面上立着一块黑色石板，边缘有一条紫线'
     />
     <p>
       试用。不必先注册。第一次下单或生图，会在这台浏览器里建立一个游客账户，积分和作品先放在这里，绑定邮箱以后才留下来。注册账号赠送 15 积分。游客不赠送，避免空账号被刷。每个 IP 只能注册一个账号，保存的是加盐哈希，不保存原始 IP。
@@ -1467,8 +1467,8 @@ const LinghuiEssay = () => (
       出图。尺寸、张数和价格如果放在浏览器里计算，就可以被改掉。尺寸从 1K 到 4K，有九种比例，也可以自己填宽高。画质分为草稿、标准、高清、超清、极致。一次可出 1 到 4 张，格式为 PNG、JPEG、WebP 或 GIF。最多可附 4 张参考图。界面只显示极速版、精修版，实际调用的模型留在服务端。
     </p>
     <LinghuiFigure
-      src='/linghui/prints.jpg'
-      alt='暗色工作台上四张不同比例的成图'
+      src='/linghui/wall.jpg'
+      alt='白墙上并排挂着四幅画'
     />
     <p>
       成图。上游文件会带上厂商的元数据。写入存储前去掉这些信息，再写入本站的 AI 生成标识。只改文件信息，像素不重新压缩。生成失败会把积分退回。
@@ -1481,8 +1481,8 @@ const LinghuiEssay = () => (
       D1 没有交互式事务，积分的增减写在 SQL 触发器里：订单状态变成已支付才加积分；插入生成记录时先检查余额再扣积分；失败只从进行中退回一次。支付宝的签名和验签、密码哈希都用 Web Crypto，因为 Workers 上没有 Node.js 的加密模块。登录态是 HttpOnly cookie，有效期 30 天。
     </p>
     <LinghuiFigure
-      src='/linghui/stack.jpg'
-      alt='暗色工作台上的黑色模块、一个带指示灯的核心，和一排存储盘'
+      src='/linghui/layers.jpg'
+      alt='浅色石面上的玻璃层、一个带紫点的方块，和三块薄板'
     />
     <blockquote>
       游客的积分和作品只在这台浏览器里。换浏览器，或清除 cookie 之后，就找不到了。要留下，需要绑定邮箱。
