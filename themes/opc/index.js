@@ -203,6 +203,7 @@ const SiteHeader = () => {
 
 const OFFER_HREF = '/article/ai-model-offer'
 const OFFER_TITLE = '提供 ai大模型处理方案'
+const OFFER_HOME_TITLE = 'AI大模型处理方案'
 const OFFER_LINES = [
   {
     src: '/offer/path.jpg',
@@ -303,17 +304,15 @@ const TaskTicket = () => (
       <LazyImage
         priority
         src={OFFER_LINES[0].src}
-        alt={OFFER_TITLE}
+        alt={OFFER_HOME_TITLE}
         className='h-full w-full object-cover'
       />
     </SmartLink>
     <div className='opc-offer-copy'>
       <SmartLink href={OFFER_HREF} className='opc-offer-title'>
-        {OFFER_TITLE}
+        {OFFER_HOME_TITLE}
       </SmartLink>
-      {OFFER_LINES.map(line => (
-        <p key={line.src}>{line.text}</p>
-      ))}
+      <p>{OFFER_LINES[3].text}</p>
     </div>
   </aside>
 )
@@ -814,9 +813,10 @@ const Style = () => (
     }
 
     #theme-opc .opc-offer-title {
-      font-size: 1.0625rem;
+      font-size: clamp(1.85rem, 3.2vw, 2.45rem);
       font-weight: 600;
-      line-height: 1.45;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
       text-wrap: balance;
     }
 
