@@ -1287,6 +1287,60 @@ const Style = () => (
       transition: color 0.18s ease;
     }
 
+    /* 灵绘文章配图 */
+    #theme-opc .opc-linghui-title {
+      margin: 1.75rem 0 0;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    #theme-opc .opc-linghui {
+      margin-bottom: 2.75rem;
+    }
+
+    #theme-opc .opc-linghui h2 {
+      margin: 2.4rem 0 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    #theme-opc .opc-linghui p,
+    #theme-opc .opc-linghui blockquote {
+      margin: 0.95rem 0 0;
+      font-size: 1.0625rem;
+      line-height: 1.85;
+    }
+
+    #theme-opc .opc-linghui blockquote {
+      border-left: 2px solid var(--opc-hairline);
+      padding-left: 1rem;
+      color: var(--opc-console-text-secondary);
+    }
+
+    #theme-opc .opc-linghui-link {
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+    }
+
+    #theme-opc .opc-linghui-figure {
+      margin: 1.35rem 0 0;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      aspect-ratio: 16 / 9;
+      background: #0a0a0a;
+    }
+
+    #theme-opc .opc-linghui-figure img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     /* 文章页 */
     #theme-opc .opc-post-meta {
       display: flex;
@@ -1360,6 +1414,82 @@ const LayoutIndex = props => {
   )
 }
 
+const LINGHUI_SITE = 'https://images.vcv.lv'
+
+const LinghuiText = ({ text }) => {
+  const parts = text.split(LINGHUI_SITE)
+  if (parts.length === 1) return text
+  return parts.map((part, index) => (
+    <span key={index}>
+      {part}
+      {index < parts.length - 1 && (
+        <a href={LINGHUI_SITE} className='opc-linghui-link'>
+          {LINGHUI_SITE}
+        </a>
+      )}
+    </span>
+  ))
+}
+
+const LinghuiFigure = ({ src, alt, priority = false }) => (
+  <figure className='opc-linghui-figure'>
+    <LazyImage
+      priority={priority}
+      src={src}
+      alt={alt}
+      className='h-full w-full object-cover'
+    />
+  </figure>
+)
+
+const LinghuiEssay = () => (
+  <div className='opc-linghui'>
+    <p>
+      <LinghuiText text='灵绘 AI 是自建的图像生成站点，线上地址是 https://images.vcv.lv。要处理的是三件事：国内怎么付款、不注册能不能先用、以及模型名称和上游文件信息能不能留在服务端。' />
+    </p>
+    <LinghuiFigure
+      priority
+      src='/linghui/studio.jpg'
+      alt='暗色工作台上的显示器，屏幕里是一张没有文字的建筑照片'
+    />
+    <h2>要解决的问题</h2>
+    <p>
+      付款。常见的海外订阅在国内走不通。站点用支付宝当面付：预下单，页面出示二维码，到账通知先做 RSA2 验签，再核对应用和金额。同一笔通知会重复到达，积分只允许加一次。积分包有三档：入门包 9.90 元 / 200 积分，进阶包 49 元 / 1100 积分，工作室包 99 元 / 2400 积分。
+    </p>
+    <LinghuiFigure
+      src='/linghui/pay.jpg'
+      alt='暗色工作台上竖着一台手机，旁边是一块黑色终端'
+    />
+    <p>
+      试用。不必先注册。第一次下单或生图，会在这台浏览器里建立一个游客账户，积分和作品先放在这里，绑定邮箱以后才留下来。注册账号赠送 15 积分。游客不赠送，避免空账号被刷。每个 IP 只能注册一个账号，保存的是加盐哈希，不保存原始 IP。
+    </p>
+    <p>
+      出图。尺寸、张数和价格如果放在浏览器里计算，就可以被改掉。尺寸从 1K 到 4K，有九种比例，也可以自己填宽高。画质分为草稿、标准、高清、超清、极致。一次可出 1 到 4 张，格式为 PNG、JPEG、WebP 或 GIF。最多可附 4 张参考图。界面只显示极速版、精修版，实际调用的模型留在服务端。
+    </p>
+    <LinghuiFigure
+      src='/linghui/prints.jpg'
+      alt='暗色工作台上四张不同比例的成图'
+    />
+    <p>
+      成图。上游文件会带上厂商的元数据。写入存储前去掉这些信息，再写入本站的 AI 生成标识。只改文件信息，像素不重新压缩。生成失败会把积分退回。
+    </p>
+    <h2>技术栈</h2>
+    <p>
+      <LinghuiText text='页面是 Next.js 16、React 19、TypeScript 和 Tailwind CSS 4，用 OpenNext 部署到 Cloudflare Workers。账号、订单、积分流水和生成记录在 D1，成图在 R2。域名是 images.vcv.lv。workers.dev 在国内不稳定，支付宝的异步通知也打到这个域名。图像请求只在 Worker 里发出，参数用 Zod 校验。' />
+    </p>
+    <p>
+      D1 没有交互式事务，积分的增减写在 SQL 触发器里：订单状态变成已支付才加积分；插入生成记录时先检查余额再扣积分；失败只从进行中退回一次。支付宝的签名和验签、密码哈希都用 Web Crypto，因为 Workers 上没有 Node.js 的加密模块。登录态是 HttpOnly cookie，有效期 30 天。
+    </p>
+    <LinghuiFigure
+      src='/linghui/stack.jpg'
+      alt='暗色工作台上的黑色模块、一个带指示灯的核心，和一排存储盘'
+    />
+    <blockquote>
+      游客的积分和作品只在这台浏览器里。换浏览器，或清除 cookie 之后，就找不到了。要留下，需要绑定邮箱。
+    </blockquote>
+  </div>
+)
+
 const LayoutSlug = props => {
   const post = props?.post
   const meta = [
@@ -1374,6 +1504,29 @@ const LayoutSlug = props => {
     post &&
     (post.title === OFFER_TITLE ||
       String(post.slug || '').includes('ai-model-offer'))
+  const isLinghui =
+    post &&
+    (post.title === '灵绘 AI' ||
+      String(post.slug || '').includes('images-vcv'))
+
+  if (isLinghui && !props.lock) {
+    return (
+      <main className='mx-auto max-w-3xl px-5 py-12 md:px-8'>
+        <div className='opc-post-meta'>
+          <SmartLink href='/#records' className='opc-nav-link'>
+            ← 返回长期记录
+          </SmartLink>
+          {meta && <span className='opc-muted text-xs'>{meta}</span>}
+        </div>
+        <article id='article-wrapper'>
+          <h1 className='opc-linghui-title'>{post.title}</h1>
+          <LinghuiEssay />
+          <ShareBar post={post} />
+          <Comment frontMatter={post} />
+        </article>
+      </main>
+    )
+  }
 
   if (isOffer && !props.lock) {
     return (
